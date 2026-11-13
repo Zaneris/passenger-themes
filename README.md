@@ -79,10 +79,42 @@ and its default value; a token takes the kind of value its default is:
 | a number (`x:Double`) | a number, 0 to 1000 |
 | a syntax style (`x:String`) | `"Normal"`, `"Bold"`, `"Italic"` or `"Bold Italic"` |
 
+Beside those, a theme may give `Syntax.Brace4`, `Syntax.Brace5` and `Syntax.Brace6`: bracket pairs take turns in as many
+colours as a theme gives, three to six, so a theme of five draws the sixth depth in `Syntax.Brace1`'s colour
+(`Syntax.Brace5` counts only after `Syntax.Brace4`, `Syntax.Brace6` only after both). It may also give
+`SyntaxStyle.Parameter`. `Syntax.Parameter`, `Syntax.Local`, `Syntax.Namespace` and `Syntax.Operator` left out are drawn
+in the theme's own `Editor.Text`.
+
 ## A code colour scheme
 
 The same shape as a theme, giving only the code's tokens: `Editor.*`, `Syntax.*`, `SyntaxStyle.*` and `Diff.*`. It is
 laid over the theme in force; `dark` gives its colours under a dark theme and `light` under a light one.
+
+## A theme over a VS Code colour theme
+
+A theme may name a VS Code colour theme as its base, and give only what it changes:
+
+```json
+{
+  "format": 1,
+  "name": "Dusk over Dracula",
+  "vscode": { "id": "dracula-theme.theme-dracula", "theme": "Dracula Theme", "version": "2.25.1" },
+  "tokens": { "ControlRadius": 0, "Accent": "#FF79C6" }
+}
+```
+
+- `id` is the extension's [Open VSX](https://open-vsx.org) id, `publisher.name` (open-vsx.org/extension/PUBLISHER/NAME).
+- `theme` is the colour theme's label in that extension, as its `package.json` names it under `contributes.themes`.
+- `version`, optional, pins the extension's version; left out, Passenger's Refresh takes the newest.
+- Or `"vscode": { "file": "dracula.json" }` names a VS Code theme's JSON beside the theme's file (the files it includes
+  beside it too).
+
+The VS Code theme gives the code's colours (its token and semantic token colours, its bracket colours up to six) and the
+window's where it has them; the theme's own tokens, background, fonts, languages and layout are laid over it. It shows in
+the VS Code theme's variant, dark or light, whatever Passenger's Dark or light setting says. Passenger fetches the base
+with the theme and keeps it beside it, so it draws offline. Every word and mark is held to WCAG AA: a colour too faint to
+read is moved in lightness only as far as it must. See
+[docs/themes.md](https://github.com/Zaneris/passenger/blob/main/docs/themes.md) for the colours each VS Code key gives.
 
 ## How Passenger reads a file
 
