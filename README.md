@@ -11,17 +11,17 @@ nothing it cannot check.
 
 ## The themes
 
-- **Harbour**: Warm and quiet: the app icon's teal on linen by day and a warm charcoal by night, its amber for what wants a glance. Rounder than Passenger's own, the open editor tab a card in the editor's colour joined to it, round badges and chips, and popups with no crown.
-- **Sorbet**: Soft pastels on a dusky plum by night and a pale lavender paper by day, a mauve accent and peach for the caret.
-- **Nocturne**: A violet night of hot pink keywords, lemon strings and mint calls, its day a lilac-tinted page.
-- **Saffron**: Ink-dark slate with saffron and tangerine, sky-blue types and lime strings; by day the same on chalk.
-- **Bonbon**: A cool grey night lit with candy pink, butter, mint and sky, its day a blush-white page.
-- **Ledger**: Plain neutral greys with a clear blue accent, coral keywords and navy or ice strings: quiet, for long days.
-- **Slate**: A soft blue-grey with lilac keywords, sage strings, cornflower calls and wheat types, day and night alike.
-- **Orbit**: Deep space with signal teal, aqua and periwinkle and a warm sand for strings; by day a pale observatory.
-- **Nightjar**: A navy night sky of violet keywords, apricot strings and seafoam members; its day a cool white page.
-- **Moss**: A green-grey woodland, sage and leaf with honey strings and clay types, easy on the eye night and day.
-- **Phosphor**: A near-black terminal glass with electric lime, cyan and violet; by day crisp ink on white.
+- **Harbour**: Warm and quiet: the app icon's teal on linen by day and a warm charcoal by night, its amber for what wants a glance. Rounder than Passenger's own, the open editor tab a card in the editor's colour joined to it, round badges and chips, and popups with no crown, its parameters in italics and six colours for its brackets. The tide comes in along the editor's foot and the Welcome screen, a low sun glinting on it.
+- **Sorbet**: Soft pastels on a dusky plum by night and a pale lavender paper by day, a mauve accent and peach for the caret; round as a scoop, peach, mauve and mint light in its corners, its comments and parameters in italics.
+- **Nocturne**: A violet night of hot pink keywords, lemon strings and mint calls, its colours those of Dracula Theme by the Dracula Theme team (dracula-theme.theme-dracula on Open VSX, MIT), under pill shapes, a crescent moon and stars across the Welcome screen, the frame and the tool windows, and the Explorer on the right.
+- **Saffron**: Ink-dark slate with saffron and tangerine, sky-blue types and lime strings; by day the same on chalk. A sunburst rises behind the Welcome screen and the window's frame, and the title bar glows from ink into ember.
+- **Bonbon**: A cool grey night lit with candy pink, butter, mint and sky, its day a blush-white page; round and soft, with sprinkles tossed across the tool windows and the Welcome screen and the terminal open below.
+- **Ledger**: Plain neutral greys with a clear blue accent, coral keywords and navy or ice strings: quiet, for long days. Dense and square-cornered on a ledger's graph paper, its tool windows laid out for the day's accounts.
+- **Slate**: A soft blue-grey with lilac keywords, sage strings, cornflower calls and wheat types, its colours those of One Dark Pro by Binaryify (zhuangtongfa.material-theme on Open VSX, MIT), under card shapes, a survey map's contours behind the code, and the terminal and problems open below.
+- **Orbit**: Deep space with signal teal, aqua and periwinkle and a warm sand for strings; by day a pale observatory. Orbits circle a sun off the corner of every editor, the title bar runs teal into periwinkle, and the editor's tabs stand down its side.
+- **Nightjar**: A navy night sky of violet keywords, apricot strings and seafoam members, its colours those of Night Owl by Sarah Drasner (sdras.night-owl on Open VSX, MIT), under card shapes, a nightjar crossing the moon on the Welcome screen and behind the tool windows, and the editor's tabs down its side.
+- **Moss**: A green-grey woodland, sage and leaf with honey strings and clay types, easy on the eye night and day; ferns grow from the editor's foot, and it opens calm, the Explorer alone.
+- **Phosphor**: A near-black terminal glass with electric lime, cyan and violet; by day crisp ink on white. Sharp-cornered, a screen's scanlines behind the code and a lime glow round its popups by night, the terminal open below.
 
 ## The code colour schemes
 
@@ -63,10 +63,12 @@ no absolute path or address, each ending `.json`). A theme's images go beside it
 
 `name` is required, at most 64 characters; `description` is optional, at most 1,000. `tokens` holds values for both
 variants, `dark` and `light` for one each; a token goes in `tokens` or in `dark` and `light`, never both. Any of the
-three may be left out.
+three may be left out, as may `background`, `fonts`, `languages`, `layout` and `vscode` below.
 
 A token is named as its key in [Tokens.axaml](https://github.com/Zaneris/passenger/blob/main/src/Passenger.App/Theme/Tokens.axaml) without `Passenger.`:
-`Frame`, `Editor.Background`, `Syntax.Keyword`, `SyntaxStyle.Comment`, `ControlRadius`. Tokens.axaml gives every token
+`Frame`, `Editor.Background`, `Syntax.Keyword`, `SyntaxStyle.Comment`, `ControlRadius`, and the margins
+`EditorTextPadding` (between the editor's gutter and its text), `ToolHeaderHeight`, `ToolTitleMargin` and
+`DialogFooterPadding`. Tokens.axaml gives every token
 and its default value; a token takes the kind of value its default is:
 
 | The default | The value |
@@ -79,11 +81,117 @@ and its default value; a token takes the kind of value its default is:
 | a number (`x:Double`) | a number, 0 to 1000 |
 | a syntax style (`x:String`) | `"Normal"`, `"Bold"`, `"Italic"` or `"Bold Italic"` |
 
-Beside those, a theme may give `Syntax.Brace4`, `Syntax.Brace5` and `Syntax.Brace6`: bracket pairs take turns in as many
-colours as a theme gives, three to six, so a theme of five draws the sixth depth in `Syntax.Brace1`'s colour
-(`Syntax.Brace5` counts only after `Syntax.Brace4`, `Syntax.Brace6` only after both). It may also give
-`SyntaxStyle.Parameter`. `Syntax.Parameter`, `Syntax.Local`, `Syntax.Namespace` and `Syntax.Operator` left out are drawn
-in the theme's own `Editor.Text`.
+Beside those, a theme may give three tokens Passenger's own theme leaves out, `Syntax.Brace4`, `Syntax.Brace5` and
+`Syntax.Brace6`: rainbow braces take turns in as many colours as a theme gives, three to six, a bracket's depth cycling
+through exactly those (`Syntax.Brace5` counts only after `Syntax.Brace4`, `Syntax.Brace6` only after both), so a theme of
+five draws the sixth depth in `Syntax.Brace1`'s colour. It may also give `SyntaxStyle.Parameter`, how a parameter is set.
+`Syntax.Parameter`, `Syntax.Local`, `Syntax.Namespace` and `Syntax.Operator` are drawn in the code's plain words in
+Passenger's own theme; a file that leaves them out draws them in its own `Editor.Text`, unless it is laid over a VS Code
+theme, whose own they are.
+
+### Its background picture
+
+```json
+"background": {
+  "image": "dusk.webp",
+  "opacity": 0.25,
+  "tint": { "colour": "#101830", "strength": 0.2 },
+  "places": ["editor", "toolWindows", "frame", "welcome"],
+  "fit": "cover",
+  "align": "bottom right",
+  "light": { "image": "day.jpg", "opacity": 0.2 }
+}
+```
+
+`image` is a picture beside the theme's file (its folders joined by `/`, no `..`): a PNG, JPEG or WebP of at most 8 MB,
+at most 8192 pixels along a side and 16 million pixels in all. Passenger reads its size from its
+header before anything decodes it, then decodes it with its own decoders. The rest may be left out:
+
+- `opacity`, how much of the picture shows, 0 to 0.3 (0.15 if left out). The picture is drawn over the area, its text and
+  its ground alike, so every glyph keeps at least 70% of its contrast with its ground whatever the picture holds.
+- `tint`, a colour washed over the picture at a `strength` from 0 (none) to 1 (the colour alone; 0.5 if left out).
+- `places`, where it is drawn: one or more of `editor` (each editor, fitted to it), `toolWindows` (each tool window's
+  page), `frame` (the toolbar, the stripes, the editor tabs' strip and the status bar, fitted to the whole window so they
+  show one picture) and `welcome` (the Welcome screen). `["editor"]` if left out.
+- `fit`: `cover` (fills the area, its overflow cut off; the default), `contain` (whole inside the area), `tile` (at its own
+  size, repeated) or `centre` (at its own size, once).
+- `align`: `centre` (the default), or `top`, `bottom`, `left`, `right`, or one of each, `bottom right`.
+- `dark` and `light` give what differs under one variant, the rest as above, or `"none"` for no picture there.
+
+The picture is kept beside the theme when the theme is chosen, so it draws offline too.
+
+### Its fonts
+
+```json
+"fonts": { "code": { "family": "Fira Code", "size": 14 }, "window": { "family": "Inter" } }
+```
+
+The code's and the window's family, each by its name, and the code's `size` in points (6 to 48). A family or size you
+choose in Settings wins wherever you chose one; Reset Font Size goes back to the theme's size. A family not installed
+here leaves Passenger's own.
+
+### The code's colours by language
+
+```json
+"languages": {
+  "csharp": { "dark": { "Syntax.Keyword": "#FF7AB8" }, "light": { "Syntax.Keyword": "#B0306A" } },
+  "json": { "tokens": { "SyntaxStyle.Comment": "Italic" } }
+}
+```
+
+A language is named by its id as Passenger knows it (`csharp`, `xaml`, `msbuild`, `xml`, `json`, `aspnetcorerazor`, `gdscript`, `typescript`,
+`css`, `markdown`, …), and gives the code's tokens (`Editor.*`, `Syntax.*`, `SyntaxStyle.*`, `Diff.*`) in `tokens`,
+`dark` and `light` as a theme gives its own. They are laid over the file's own tokens in that language's editors. A
+language this Passenger does not know is passed over and named.
+
+### Its default layout
+
+```json
+"layout": {
+  "places": { "rightTop": ["explorer", "commit"], "bottomLeft": ["build", "run"], "bottomRight": ["problems"] },
+  "open": ["explorer", "build", "problems"],
+  "sizes": { "left": 260, "right": 320, "bottom": 220 },
+  "editorTabs": "left",
+  "toolWindows": "tabs",
+  "stripeIcons": "untabbed",
+  "closedWindows": "leave",
+  "findResults": "window"
+}
+```
+
+Where the tool windows dock when nobody has arranged them: what a window opens on before any layout is kept, and what
+Window | Layout Settings | Restore Default Layout goes back to. A layout you arrange yourself always wins, and is kept as
+yours whatever theme you choose; choosing another theme moves the windows only while they still stand where the theme
+before put them.
+
+- `places` names, for any of `leftTop`, `leftBottom`, `rightTop`, `rightBottom`, `bottomLeft` and `bottomRight`, the tool
+  windows docked there in their order, before those the theme leaves where Passenger puts them. A window docks in one
+  place. The windows are named by their ids: `explorer`, `structure`, `bookmarks`, `commit`, `run`, `debug`, `tests`,
+  `build`, `problems`, `find`, `git`, `nuget`, `terminal`, `localHistory`, `containers`, `profiler`, `hierarchy`,
+  `endpoints`, `requests`, `liveTree`, `game`, `aspire` and `migrations`. `editor` names those shown as tabs among the
+  editors instead, their icons on the stripes where Passenger puts them.
+- `open` lists the windows open at the start, every other closed; left out, Passenger's own open (the Explorer). A place
+  shows one window, the first in its order.
+- `sizes` gives the left and right areas' widths and the bottom one's height, each 100 to 2000 pixels; one left out is
+  Passenger's own.
+- `editorTabs` stands each editor's tabs in a row across its `top`, or in a column down its `left` or `right` side; left
+  out, across the top.
+- `toolWindows` names the docked tool windows by their `icons` on the stripes alone, or by `tabs` too: titled tabs along
+  the foot of each place where several dock; left out, by icons.
+- `stripeIcons` keeps an icon on the stripes for `all` the windows while titled tabs name them, or only for those no
+  titled tab names (`untabbed`), so a window whose place is open with its tab is named once; left out, all.
+- `closedWindows` says what closing a tool window by its × does to its icon: `keep` it on the stripe, as hiding it does,
+  or `leave` the stripe until the window is opened again from View | Tool Windows, Find Action or its keys; left out,
+  keep.
+- `findResults` keeps Find in Files' matches in its `popup` alone, or in the Find `window` as well once one is gone to,
+  a tab to go back to, where the places Go to Declaration and the like find to choose from are listed too; left out, the
+  popup.
+
+What the layout arranges beyond where the windows dock (`editorTabs`, `toolWindows`, `stripeIcons`, `closedWindows`, `findResults`) is each a setting of Settings | Appearance: the
+theme's is the default there, and the place you choose wins over it whatever theme you choose, until you choose Theme
+default again.
+
+A window or place this Passenger does not have is passed over and named.
 
 ## A code colour scheme
 
@@ -138,7 +246,16 @@ read is moved in lightness only as far as it must. See
 
 The ten generated themes (Sorbet to Phosphor) are written from palettes by Passenger's `tools/themes.py`
 (`just themes FOLDER` in a Passenger checkout, FOLDER this repository's); change a palette there rather than its file.
-Harbour and Reef are written by hand.
+Harbour and Reef are written by hand. The pictures in `pictures/` are drawn by Passenger's `tools/theme-pictures.py` (the
+same recipe) from plain geometry and seeded randomness: tide lines, soft glows, a moon and stars, a sunburst, sprinkles,
+graph paper, contour lines, orbits, a fern grown by Barnsley's maps and scanlines, nothing taken from elsewhere, and they
+are this repository's under its licence.
+
+Nocturne, Slate and Nightjar are laid over VS Code colour themes fetched from Open VSX by their ids, so this repository
+carries none of their files: Nocturne over Dracula Theme (`dracula-theme.theme-dracula`, MIT, the Dracula Theme team),
+Slate over One Dark Pro (`zhuangtongfa.material-theme`, MIT, Binaryify) and Nightjar over Night Owl (`sdras.night-owl`,
+MIT, Sarah Drasner). Their colours are those themes' authors'; what Passenger sets over them, the shapes, fonts,
+pictures and layouts, is this repository's.
 
 ## Licence
 
